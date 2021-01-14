@@ -1,13 +1,13 @@
 ---
 layout: post title: "Carl Sagan, lo Scetticismo e l'Ingegneria del Software"
-date: 2012-05-25 14:47 categories:
-
-- computer
-- scienza
-- ingegneria del software
-- post in italiano
-
+date: 2012-05-25 14:47
+categories:
+  - computer
+  - scienza
+  - ingegneria del software
+  - post in italiano
 ---
+
 Ieri sera
 leggevo <a href="http://www.brainpickings.org/index.php/2012/05/23/carl-sagan-the-burden-of-skepticism/" title="Carl Sagan on Mastering the Vital Balance of Skepticism and Openness">
 questo articolo</a> in cui viene citato Carl Sagan, probabilmente il migliore divulgatore scientifico mai vissuto sul
