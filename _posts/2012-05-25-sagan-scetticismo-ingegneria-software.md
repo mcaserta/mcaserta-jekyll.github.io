@@ -1,5 +1,6 @@
 ---
-layout: post title: "Carl Sagan, lo Scetticismo e l'Ingegneria del Software"
+layout: post
+title: "Carl Sagan, lo Scetticismo e l'Ingegneria del Software"
 date: 2012-05-25 14:47
 categories:
   - computer
