@@ -6,6 +6,7 @@ categories:
   - software development
   - posts in english
 ---
+
 Most issues in software development usually arise from poor,
 inconsistent knowledge of the domain at hand. A topic apparently as
 simple as time representation, serialization and management can easily
@@ -20,11 +21,11 @@ very simple few concepts needed not to incur into time management hell.
 
 ## Representation
 
-A question as simple as *"What time is it?"* underlies a number of
+A question as simple as *"What time is it?"* assumes a number of
 contextual subleties that are obvious to the human brain, but become
 absolute nonsense for a computer.
 
-For instance, if you were asking to me the above question right now, I
+For instance, if you were asking to me what time is it right now, I
 might say: *"It's 3:39"* and, if you were a colleague in my office,
 that'd be enough information to infer that it's 3:39pm CEST. That's
 because you would already be in possession of some bits of important
@@ -33,7 +34,7 @@ contextual information such as
 * it's an afternoon because we've already had lunch
 * we're in Rome, therefore our timezone is Central European Time (CET)
   or Central European Summer Time (CEST)
-* we've switched to daylight savings time a few weeks earlier so, the
+* we've switched to daylight savings time a few weeks earlier, so the
   current timezone must be Central European Summer Time
 
 *3:39* only happens to be a convenient representation of time as long as
@@ -45,8 +46,8 @@ in an universal way, you should have an idea what
 Now, suppose I have to schedule a skype chat with a fellow software
 developer in the US. I could write him an email and say something along
 the lines of *"see you on 2/3"*. In Italy, that would be the second day
-of the month of march, but to an US person, that would be the third day
-of the month of february. As you can see, how our chat is never going to
+in the month of march, but to an US person, that would be the third day
+in the month of february. As you can see, how our chat is never going to
 happen.
 
 These are only a few examples of the kind of issues that might arise
@@ -62,7 +63,7 @@ for UTC). Same instant, different representations.
 The ISO 8601 standard also has the nice side effect of providing natural
 sorting in systems that use lexicographical order (such as filesystems)
 because information is organized from most to least significant, i.e.
-year, month, day, hour, minute, second, fraction of second.
+year, month, day, hour, minute, second, fraction of a second.
 
 Even if you're only dealing with local times in your software, you
 should know that, unless you also display the time zone, you can never
@@ -89,10 +90,22 @@ Let me summarize a few key points to bring home so far:
 
 ## Serialization
 
-Speaking of software, serialization is a process where you take an
-entity and spell it out in such a way that it can be later entirely
-rebuilt, exactly like the original, by using the spelt out (serialized)
-information.
+Speaking of software, serialization is a process where you take an object's
+status and spell it out in such a way that it can be later entirely rebuilt,
+exactly like the original, by using the spelt out (serialized) information.
+Think of an xml or json file:
+
+```
+{
+  "person": {
+    "name": "Mirko",
+    "surname": "Caserta",
+    "class": "nerd"
+  }
+}
+```
+
+This is the serialized form of a peculiar imaginary person class instance.
 
 In the binary world of computers, time is usually serialized and stored
 by using the [Unix time](http://en.wikipedia.org/wiki/Unix_time)
@@ -102,36 +115,34 @@ UTC. Isn't that a pretty clever, consistent and compact way of
 representing a plethora of information, such as `April 17 2013 @
 11:42:07am CEST`?
 
-Unix time is only another arbitrary representation of a given moment in
-time, although a not very human readable one. But you can take that
-number, write it on a piece of paper, stick it to a carrier pigeon, and
-your recipient would be able to decipher your vital message by simply
-turning to the Internet and visiting a site such as
-[unixtimestamp.com](http://www.unixtimestamp.com/).
+Unix time is only another arbitrary representation of a given moment in time,
+although a not very human readable one. But you can take that number, write it
+on a piece of paper, stick it onto a carrier pigeon, and your recipient would
+be able to decipher your vital message by simply turning to the Internet and
+visiting a site such as [unixtimestamp.com](http://www.unixtimestamp.com/).
 
 Just like you can write that number on a piece of paper and later get
 back the full instant back to life, you can store it in a file or a
-row in your favorite RDMBS. Although you might want to talk to your
+row in your favorite RDBMS. Although you might want to talk to your
 RDBMS using a proper driver and handing it a plain date instance; your
 driver will then take care of the conversion to the underlying database
 serialization format for native time instances. 
 
-By storing time using a native format, you get for free the nice
-time formatting, sorting, querying, etc features of your RDBMS, so you
-might want to think twice before storing plain Unix timestamps.
+By storing time using a native format, you get the nice time formatting,
+sorting, querying, etc features of your RDBMS for free, so you might want to
+think twice before storing plain Unix timestamps in, say, Oracle.
 
 Just make sure you know what timezone your Unix timestamp refers to, or
 you might get confused later at deserialization time.
 
-ISO 8601 is also a serialization favorite. In fact, it is used in the
-[XML Schema](http://www.w3.org/TR/xmlschema-2/#isoformats) standard.
-Most xml frameworks are natively able to serialize and deserialize back
-and forth from `xs:date`, `xs:time` and `xs:dateTime` to your
-programming language's native format (and viceversa). Just be careful
-when dealing with partial representations: for instance, if you omit the
-time zone, make sure you agree beforehand on a default one with your
-communicating party (usually UTC or your local time zone if you're both
-in the same one). 
+ISO 8601 is also a serialization favorite. In fact, it is used in the [XML
+Schema](http://www.w3.org/TR/xmlschema-2/#isoformats) standard.  Most xml
+frameworks are natively able to serialize and deserialize back and forth from
+`xs:date`, `xs:time` and `xs:dateTime` to your programming language's native
+format (and viceversa). The same is true for json. Just be careful when dealing
+with partial representations: for instance, if you omit the time zone, make
+sure you agree beforehand on a default one with your communicating party
+(usually UTC or your local time zone if you're both in the same one). 
 
 ## Management
 
@@ -146,18 +157,14 @@ classes from JDK 7, respectively weighting 1331 and 3179 lines of code.
 
 Okay, these are probably not the best examples of software routines that
 deal with time, I agree. That's why Java libraries like 
-[Joda Time](http://joda-time.sourceforge.net/) were written (so you don't have
-to)! In fact, Joda Time has become so popular that it gave birth to
+[Joda Time](http://joda-time.sourceforge.net/) were written.
+In fact, Joda Time has become so popular that it gave birth to
 [JSR-310](http://jcp.org/en/jsr/detail?id=310) and is
 [now](http://www.h-online.com/open/news/item/JSR-310-s-Date-and-Time-API-added-to-JDK-8-1708647.html)
 [part](http://www.infoq.com/news/2013/02/java-time-api-jdk-8) of JDK 8.
 
-Use of popular, well designed and implemented time frameworks will save
-your life. Seriously. Take your time to get familiar with the API of
-your choosing. If you are into Scala, I can recommend
-[nscala-time](https://github.com/nscala-time/nscala-time). And if you
-are into other programming languages, honestly, I have no idea, but ask
-your local guru: she can help.
+Use of popular, well designed and implemented time frameworks will save your
+life. Seriously. Take your time to get familiar with the API of your choosing. 
 
 ## Further Resources
 
