@@ -119,7 +119,8 @@ Unix time is only another arbitrary representation of a given moment in time,
 although a not very human readable one. But you can take that number, write it
 on a piece of paper, stick it onto a carrier pigeon, and your recipient would
 be able to decipher your vital message by simply turning to the Internet and
-visiting a site such as [unixtimestamp.com](http://www.unixtimestamp.com/).
+visiting a site such as [unixtimestamp.com](http://www.unixtimestamp.com/) or
+[currentmillis.com](https://currentmillis.com/).
 
 Just like you can write that number on a piece of paper and later get
 back the full instant back to life, you can store it in a file or a
