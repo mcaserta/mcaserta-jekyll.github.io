@@ -95,7 +95,7 @@ status and spell it out in such a way that it can be later entirely rebuilt,
 exactly like the original, by using the spelt out (serialized) information.
 Think of an xml or json file:
 
-```
+```json
 {
   "person": {
     "name": "Mirko",
